@@ -771,15 +771,15 @@ func RGB(r, g, b byte) COLORREF {
 
 type (
 	COLORREF     uint32
-	HBITMAP      HGDIOBJ
-	HBRUSH       HGDIOBJ
-	HDC          HANDLE
-	HFONT        HGDIOBJ
-	HGDIOBJ      HANDLE
-	HENHMETAFILE HANDLE
-	HPALETTE     HGDIOBJ
-	HPEN         HGDIOBJ
-	HRGN         HGDIOBJ
+	HBITMAP      uintptr
+	HBRUSH       uintptr
+	HDC          uintptr
+	HFONT        uintptr
+	HGDIOBJ      uintptr
+	HENHMETAFILE uintptr
+	HPALETTE     uintptr
+	HPEN         uintptr
+	HRGN         uintptr
 	CLIPFORMAT   uint16
 )
 
