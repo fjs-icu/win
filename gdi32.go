@@ -1063,6 +1063,7 @@ var (
 	createIC                *windows.LazyProc
 	createPatternBrush      *windows.LazyProc
 	createRectRgn           *windows.LazyProc
+	createRoundRectRgn      *windows.LazyProc
 	deleteDC                *windows.LazyProc
 	deleteEnhMetaFile       *windows.LazyProc
 	deleteObject            *windows.LazyProc
@@ -1143,6 +1144,8 @@ func init() {
 	createIC = libgdi32.NewProc("CreateICW")
 	createPatternBrush = libgdi32.NewProc("CreatePatternBrush")
 	createRectRgn = libgdi32.NewProc("CreateRectRgn")
+	createRoundRectRgn = libgdi32.NewProc("CreateRoundRectRgn")
+
 	deleteDC = libgdi32.NewProc("DeleteDC")
 	deleteEnhMetaFile = libgdi32.NewProc("DeleteEnhMetaFile")
 	deleteObject = libgdi32.NewProc("DeleteObject")
@@ -1415,6 +1418,18 @@ func CreateRectRgn(nLeftRect, nTopRect, nRightRect, nBottomRect int32) HRGN {
 		uintptr(nBottomRect),
 		0,
 		0)
+
+	return HRGN(ret)
+}
+
+func CreateRoundRectRgn(nLeftRect, nTopRect, nRightRect, nBottomRect, nW, nH int32) HRGN {
+	ret, _, _ := syscall.Syscall6(createRoundRectRgn.Addr(), 6,
+		uintptr(nLeftRect),
+		uintptr(nTopRect),
+		uintptr(nRightRect),
+		uintptr(nBottomRect),
+		uintptr(nW),
+		uintptr(nH))
 
 	return HRGN(ret)
 }

@@ -1898,6 +1898,7 @@ var (
 	windowFromDC                *windows.LazyProc
 	windowFromPoint             *windows.LazyProc
 	getWindowStyle              *windows.LazyProc
+	setWindowRgn                *windows.LazyProc
 )
 
 func init() {
@@ -2060,6 +2061,7 @@ func init() {
 	windowFromPoint = libuser32.NewProc("WindowFromPoint")
 
 	getWindowStyle = libuser32.NewProc("GetWindowStyle")
+	setWindowRgn = libuser32.NewProc("SetWindowRgn")
 
 }
 
@@ -3504,4 +3506,12 @@ func WindowFromPoint(Point POINT) HWND {
 
 func GetWindowStyle(hwnd HWND) int32 {
 	return GetWindowLong(hwnd, GWL_STYLE)
+}
+
+func SetWindowRgn(hwnd HWND, iHRGN HRGN, b bool) int32 {
+	ret, _, _ := syscall.Syscall(setWindowRgn.Addr(), 3,
+		uintptr(hwnd),
+		uintptr(iHRGN),
+		uintptr(BoolToBOOL(b)))
+	return int32(ret)
 }
