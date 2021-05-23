@@ -1,4 +1,4 @@
-module win
+module github.com/fjs-icu/win
 
 go 1.12
 
