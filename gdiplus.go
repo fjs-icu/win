@@ -1987,6 +1987,10 @@ type Brush struct {
 	nativeBrush *GpBrush
 }
 
+func (b *Brush) GetBrush() *GpBrush {
+	return b.nativeBrush
+}
+
 type SolidBrush struct {
 	Brush
 }
